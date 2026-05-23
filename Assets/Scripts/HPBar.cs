@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class HPBar : MonoBehaviour
 {
+    public static HPBar instance;
     public Image realHP;
     public Image ghostHP;
 
@@ -10,6 +11,11 @@ public class HPBar : MonoBehaviour
     private float currentHP = 100f;
 
     public float ghostDelay = 0.5f;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
@@ -27,5 +33,10 @@ public class HPBar : MonoBehaviour
     {
         currentHP -= damage;
         currentHP = Mathf.Clamp(currentHP, 0f, maxHP);
+
+        if (currentHP <= 0)
+        {
+            Debug.Log("Game Over");
+        }
     }
 }
