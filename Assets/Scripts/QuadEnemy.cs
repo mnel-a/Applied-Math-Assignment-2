@@ -7,8 +7,15 @@ public class QuadraticEnemy : MonoBehaviour
     public Transform p3;
 
     public float moveDuration = 5f;
-
     private float t;
+
+    public float maxHealth = 5f;
+    private float currentHealth;
+
+    void Start()
+    {
+        currentHealth = maxHealth;
+    }
 
     void Update()
     {
@@ -29,6 +36,16 @@ public class QuadraticEnemy : MonoBehaviour
         float u = 1f - t;
 
         return u * u * p1 + 2f * u * t * p2 + t * t * p3;
+    }
+
+     public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     

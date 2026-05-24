@@ -8,8 +8,15 @@ public class CubicEnemy : MonoBehaviour
     public Transform p4;
 
     public float moveDuration = 6f;
-
     private float t;
+
+    public float maxHealth = 5f;
+    private float currentHealth;
+
+    void Start()
+    {
+        currentHealth = maxHealth;
+    }
 
     void Update()
     {
@@ -30,5 +37,15 @@ public class CubicEnemy : MonoBehaviour
         float u = 1f - t;
 
         return u * u * u * p1 + 3f * u * u * t * p2 + 3f * u * t * t * p3 + t * t * t * p4;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0f)
+        {
+            Destroy(gameObject);
+        }
     }
 }
