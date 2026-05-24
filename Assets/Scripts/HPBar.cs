@@ -4,17 +4,25 @@ using UnityEngine.UI;
 public class HPBar : MonoBehaviour
 {
     public static HPBar instance;
-    public Image realHP;
-    public Image ghostHP;
+    public Image realBar;
+    public Image ghostBar;
+    public Image backgroundBar;
 
-    public float maxHP = 100f;
-    private float currentHP = 100f;
+    public float maxHP = 20f;
+    private float currentHP;
 
-    public float ghostDelay = 0.5f;
+    public float ghostSpeed = 3f;
 
     void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Start()
@@ -25,13 +33,16 @@ public class HPBar : MonoBehaviour
     void Update()
     {
         float targetFill = currentHP / maxHP;
-        realHP.fillAmount = targetFill;
-        ghostHP.fillAmount = Mathf.Lerp(ghostHP.fillAmount, targetFill, Time.deltaTime / ghostDelay);
+
+        realBar.fillAmount = targetFill;
+
+        ghostBar.fillAmount = Mathf.Lerp(ghostBar.fillAmount, targetFill, Time.deltaTime * ghostSpeed);
     }
 
     public void TakeDamage(float damage)
     {
         currentHP -= damage;
+
         currentHP = Mathf.Clamp(currentHP, 0f, maxHP);
 
         if (currentHP <= 0)
@@ -39,4 +50,6 @@ public class HPBar : MonoBehaviour
             Debug.Log("Game Over");
         }
     }
+
+
 }

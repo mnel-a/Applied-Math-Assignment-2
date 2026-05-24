@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Creatures : MonoBehaviour
+public class CreatureSpawner : MonoBehaviour
 {
     public GameObject quadEnemy;
     public GameObject cubeEnemy;
@@ -32,22 +32,28 @@ public class Creatures : MonoBehaviour
     void SpawnQuadEnemy()
     {
         GameObject enemy = Instantiate(quadEnemy, quadSpawnPoint.position, Quaternion.identity);
-        QuadEnemy movement = enemy.GetComponent<QuadEnemy>();
+        QuadraticEnemy movement = enemy.GetComponent<QuadraticEnemy>();
 
-        movement.p1 = quadSpawnPoint;
-        movement.p2 = quadControlPoint;
-        movement.p3 = targetPoint;
+        if (movement != null)
+        {
+            movement.p1 = quadSpawnPoint;
+            movement.p2 = quadControlPoint;
+            movement.p3 = targetPoint;
+        }   
     }
 
     void SpawnCubeEnemy()
     {
         GameObject enemy = Instantiate(cubeEnemy, cubeSpawnPoint.position, Quaternion.identity);
-        CubeEnemy movement = enemy.GetComponent<CubeEnemy>();
+        CubicEnemy movement = enemy.GetComponent<CubicEnemy>();
 
-        movement.p1 = cubeSpawnPoint;
-        movement.p2 = cubeControlPoint1;
-        movement.p3 = cubeControlPoint2;
-        movement.p4 = targetPoint;
+        if (movement != null)
+        {
+            movement.p1 = cubeSpawnPoint;
+            movement.p2 = cubeControlPoint1;
+            movement.p3 = cubeControlPoint2;
+            movement.p4 = targetPoint;
+        }
     }
 
 }
