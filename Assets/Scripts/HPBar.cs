@@ -6,12 +6,13 @@ public class HPBar : MonoBehaviour
     public static HPBar instance;
     public Image realBar;
     public Image ghostBar;
-    public Image backgroundBar;
 
     public float maxHP = 20f;
     private float currentHP;
 
     public float ghostSpeed = 3f;
+
+    public GameObject gameOver;
 
     void Awake()
     {
@@ -48,6 +49,8 @@ public class HPBar : MonoBehaviour
         if (currentHP <= 0)
         {
             Debug.Log("Game Over");
+            gameOver.SetActive(true);
+            Time.timeScale = 0f;
         }
     }
 

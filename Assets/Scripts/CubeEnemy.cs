@@ -7,10 +7,10 @@ public class CubicEnemy : MonoBehaviour
     public Transform p3;
     public Transform p4;
 
-    public float moveDuration = 6f;
+    public float moveDuration = 5f;
     private float t;
 
-    public float maxHealth = 5f;
+    public float maxHealth = 1f;
     private float currentHealth;
 
     void Start()
